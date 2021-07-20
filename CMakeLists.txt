@@ -413,7 +413,7 @@ endif()
 if(UNIX)
   message(STATUS "GCC detected - Adding flags")
   set(CMAKE_CXX_STANDARD 14)
-  add_definitions(-Wall -Wextra -std=c++14)
+  add_definitions(-Wall -Wextra)
 
   set(ATOMIC_TEST_CODE "
       #include <atomic>
@@ -425,6 +425,11 @@ if(UNIX)
       message(STATUS "Adding -latomic flag, as this plattform does not support 64bit atomic operations out of the box.")
       set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")
   endif ()
+  if(BUILD_ECAL_TESTS)
+    add_compile_options(
+    "$<$<CONFIG:ASAN>:-fsanitize=address;-fno-omit-frame-pointer;-g>")
+    add_link_options("$<$<CONFIG:ASAN>:-fsanitize=address>")
+  endif(BUILD_ECAL_TESTS)
 endif()
 
 # --------------------------------------------------------

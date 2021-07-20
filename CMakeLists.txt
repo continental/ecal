@@ -137,7 +137,7 @@ if (ECAL_THIRDPARTY_BUILD_PROTOBUF)
     add_executable(protobuf::protoc ALIAS protoc)
     set(Protobuf_PROTOC_EXECUTABLE protoc)
   endif()
-  set(Protobuf_VERSION 3.11.4)
+  set(Protobuf_VERSION 3.12.3)
 endif()
 
 if (ECAL_THIRDPARTY_BUILD_SPDLOG)
